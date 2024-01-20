@@ -1,6 +1,7 @@
 import './Board.css';
 import UserCard from '../Card/UserCard';
 import { MoreHorizontal , Plus, Circle, XCircle, CircleEllipsis, PauseCircle} from 'lucide-react';
+
 const UserBoard = ({data}) => {
     return (
         <div className="board">

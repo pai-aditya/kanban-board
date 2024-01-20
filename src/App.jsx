@@ -5,7 +5,7 @@ import UserBoard from './components/Board/UserBoard';
 import { useEffect,useState } from 'react';
 const App = () => {
   const [data, setData] = useState(null);
-  const [displayType, setDisplayType] = useState('user');
+  const [displayType, setDisplayType] = useState(localStorage.getItem('displayType') || 'user');
   
   const FetchAPIData = async () => {
     try{
@@ -34,6 +34,10 @@ const App = () => {
     };
     fetchData();
   },[]);
+
+  useEffect(() => {
+    localStorage.setItem('displayType', displayType);
+  }, [displayType]);
 
   const getTasksByDisplayType = () => {
     if (!data){
@@ -79,11 +83,10 @@ const App = () => {
  return (
     <div className="app">
       <div className="app_nav">
-        <h1>Kanban Board</h1>
-        <div>
-          <label>
+        <div className='dropdown-container'>
+          <label className='dropdown-label'>
             Display by:
-            <select value={displayType} onChange={(e) => handleDisplayChange(e.target.value)}>
+            <select className='dropdown-select'  value={displayType} onChange={(e) => handleDisplayChange(e.target.value)}>
               <option value="user">user</option>
               <option value="status">status</option>
               <option value="priority">priority</option>
@@ -91,9 +94,6 @@ const App = () => {
           </label>
         </div>
       
-      </div>
-      <div>
-          {/* {JSON.stringify(displayData)} */}
       </div>
       <div className="app_boards_container">
         

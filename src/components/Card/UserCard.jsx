@@ -1,5 +1,6 @@
-import './Card.css'; // Make sure to import the CSS file
-
+import './Card.css'; 
+import { statusIconShow } from '../Board/StatusBoard';
+import { priorityIconShow } from '../Board/PriorityBoard';
 const UserCard = ({card}) => {
   return (
     <div className="task-card">
@@ -12,7 +13,13 @@ const UserCard = ({card}) => {
           ))}
         </ul>
       </div>
-      {/* <img className='user-icon' src={`https://ui-avatars.com/api/?name=${card?.user?.name}&background=random`} alt='' width={25}/> */}
+      <div className='user-icon'>
+        {statusIconShow(card.status)}
+        
+      </div>
+      <div className='user-icon-2'>
+      {priorityIconShow(card.priority)}
+      </div>
     </div>
   );
 };
