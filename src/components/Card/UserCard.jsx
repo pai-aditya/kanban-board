@@ -1,6 +1,6 @@
 import './Card.css'; // Make sure to import the CSS file
 
-const StatusCard = ({card}) => {
+const UserCard = ({card}) => {
   return (
     <div className="task-card">
       <div className="task-id">{card.id}</div>
@@ -12,11 +12,9 @@ const StatusCard = ({card}) => {
           ))}
         </ul>
       </div>
-      {/* <div className="user-icon">👤</div> */}
-      <img className='user-icon' src={`https://ui-avatars.com/api/?name=${card?.user?.name}&background=random`} alt='' width={25}/>
-
+      {/* <img className='user-icon' src={`https://ui-avatars.com/api/?name=${card?.user?.name}&background=random`} alt='' width={25}/> */}
     </div>
   );
 };
 
-export default StatusCard;
+export default UserCard;

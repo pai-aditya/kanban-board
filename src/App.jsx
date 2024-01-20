@@ -16,7 +16,6 @@ const App = () => {
           },
       });
       const data = await response.json();
-      console.log(JSON.stringify(data))
       return data;
   } catch(error){
       console.log(error);
@@ -94,39 +93,20 @@ const App = () => {
       
       </div>
       <div>
-        {/* <textarea> */}
-          {JSON.stringify(displayData)}
-        {/* </textarea> */}
+          {/* {JSON.stringify(displayData)} */}
       </div>
       <div className="app_boards_container">
-      {/* <textarea>
-        {JSON.stringify(data)}
-      </textarea> */}
+        
         {displayType==='user' &&
           <div className="app_boards">
-          {/* {displayData.map((item) => (
-            <StatusBoard
-              data={item}
-            />
-          ))} */}
-            <UserBoard displayType={displayType} data={displayData}/>
-            <UserBoard displayType={displayType} data={displayData}/>
-            <UserBoard displayType={displayType} data={displayData}/>
-            <UserBoard displayType={displayType} data={displayData}/>
-            <UserBoard displayType={displayType} data={displayData}/>
-            
-            {/* <div className="app_boards_last">
-              <Editable
-                displayClass="app_boards_add-board"
-                editClass="app_boards_add-board_edit"
-                placeholder="Enter Board Name"
-                text="Add Board"
-                buttonText="Add Board"
-                onSubmit={addboardHandler}
-              />
-            </div> */}
+            {displayData.map((item) => (
+                <UserBoard
+                  data={item}
+                />
+              ))}
           </div>
         }
+        
         {displayType==='status' &&
           <div className="app_boards">
             {displayData.map((item) => (
@@ -134,21 +114,15 @@ const App = () => {
                 data={item}
               />
             ))}
-            {/* <StatusBoard displayType={displayType} data={displayData}/>
-            <StatusBoard displayType={displayType} data={displayData}/>
-            <StatusBoard displayType={displayType} data={displayData}/>
-            <StatusBoard displayType={displayType} data={displayData}/>
-            <StatusBoard displayType={displayType} data={displayData}/> */}
           </div>
         }
         {displayType==='priority' &&
           <div className="app_boards">
-
-            <PriorityBoard displayType={displayType} data={displayData}/>
-            <PriorityBoard displayType={displayType} data={displayData}/>
-            <PriorityBoard displayType={displayType} data={displayData}/>
-            <PriorityBoard displayType={displayType} data={displayData}/>
-            <PriorityBoard displayType={displayType} data={displayData}/>
+            {displayData.map((item) => (
+                <PriorityBoard
+                  data={item}
+                />
+              ))}
           </div>
         }
       </div>
@@ -156,4 +130,4 @@ const App = () => {
   );
 }
 
-export default App
+export default App;

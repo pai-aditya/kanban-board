@@ -1,8 +1,8 @@
 .board {
-    min-width: 225px;
-    width: 225px;
+    min-width: 250px;
+    width: 250px;
     max-height: 100%;
-    flex-basis: 225px;
+    flex-basis: 250px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -67,6 +67,10 @@
   }
 
 
-  .plus, .more-horizontal, .task-icon {
+  .plus, .more-horizontal {
     margin-right: 5px;
+  }
+
+  .task-icon{
+    border-radius: 50%;
   }

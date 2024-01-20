@@ -1,12 +1,28 @@
 import './Board.css';
-import { MoreHorizontal , Plus, Circle, XCircle, CircleEllipsis, PauseCircle} from 'lucide-react';
+import StatusCard from '../Card/StatusCard';
+import { MoreHorizontal , Plus, Circle, XCircle, CircleEllipsis, PauseCircle, CheckCircle} from 'lucide-react';
 const StatusBoard = ({data}) => {
+
+    const iconShow = (status) => {
+        if(status==="Todo"){
+            return <Circle className='task-icon'/> ;
+        }else if(status==="In progress"){
+            return <CircleEllipsis className='task-icon'/> ;
+        }else if(status==="Backlog"){
+            return <PauseCircle className='task-icon'/> ;
+        }else if(status==="Done"){
+            return <CheckCircle className='task-icon'/> ;
+        }else{
+            return <XCircle className='task-icon'/> ;
+        }
+    }
     return (
         <div className="board">
             <div className="board_header">
                 
                 <p className="board_header_title">
-                <CircleEllipsis className='task-icon'/>
+                
+                {iconShow(data.status)}
                     {data?.status}
                     <span>{data?.tasks?.length || 0}</span>
                 </p>
@@ -31,13 +47,7 @@ const StatusBoard = ({data}) => {
             <div className="board_cards custom-scroll">
                 {data?.tasks?.map((item) => (
                 <StatusCard
-                    key={item.id}
                     card={item}
-                    boardId={props.board.id}
-                    removeCard={props.removeCard}
-                    dragEntered={props.dragEntered}
-                    dragEnded={props.dragEnded}
-                    updateCard={props.updateCard}
                 />
                 ))}
                 {/* <Editable
@@ -47,10 +57,6 @@ const StatusBoard = ({data}) => {
                 editClass="board_add-card_edit"
                 onSubmit={(value) => props.addCard(props.board?.id, value)}
                 /> */}
-                <h1>Card1</h1>
-                <h1>Card1</h1>
-                <h1>Card1</h1>
-                <h1>Card1</h1>
             </div>
         </div>
       );
