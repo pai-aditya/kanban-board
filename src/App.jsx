@@ -6,7 +6,8 @@ import { useEffect,useState } from 'react';
 const App = () => {
   const [data, setData] = useState(null);
   const [displayType, setDisplayType] = useState(localStorage.getItem('displayType') || 'user');
-  
+  const [sortType,setSortType] = useState(localStorage.getItem('sortType') || 'priority')
+
   const FetchAPIData = async () => {
     try{
       const response = await fetch('https://api.quicksell.co/v1/internal/frontend-assignment', {
@@ -39,46 +40,74 @@ const App = () => {
     localStorage.setItem('displayType', displayType);
   }, [displayType]);
 
-  const getTasksByDisplayType = () => {
-    if (!data){
-      return [];
-    } 
+  useEffect(() => {
+    localStorage.setItem('sortType', sortType);
+  }, [sortType]);
 
-    if(displayType==='user'){
+
+  
+  const getTasksByDisplayType = () => {
+    if (!data) {
+      return [];
+    }
+
+    const sortTasks = (tasks) => {
+      if (sortType === 'priority') {
+        return tasks.sort((a, b) => b.priority - a.priority);
+      } else if (sortType === 'title') {
+        return tasks.sort((a, b) => a.title.localeCompare(b.title));
+      } else {
+        return tasks;
+      }
+    };
+
+    if (displayType === 'user') {
       return data.users.map((user) => ({
         user,
-        tasks: data.tickets.filter((ticket) => ticket.userId === user.id),
+        tasks: sortTasks(data.tickets.filter((ticket) => ticket.userId === user.id)),
       }));
-    }else if(displayType==='status'){
+    } else if (displayType === 'status') {
       return ['Todo', 'In progress', 'Backlog', 'Done', 'Cancelled'].map((status) => ({
         status,
-        tasks: data.tickets
-          .filter((ticket) => ticket.status === status)
-          .map((task) => ({
-            ...task,
-            user: data.users.find((user) => user.id===task.userId)
-          }))
+        tasks: 
+        sortTasks(
+          data.tickets
+            .filter((ticket) => ticket.status === status)
+            .map((task) => ({
+              ...task,
+              user: data.users.find((user) => user.id === task.userId),
+            }))
+        ),
       }));
-    }else if(displayType==='priority'){
+    } else if (displayType === 'priority') {
       return [0, 1, 2, 3, 4].map((priority) => ({
         priority,
-        tasks: data.tickets
-          .filter((ticket) => ticket.priority === priority)
-          .map((task) => ({
-            ...task,
-            user: data.users.find((user) => user.id === task.userId),
-          })),
+        tasks: 
+          sortTasks(
+            data.tickets
+              .filter((ticket) => ticket.priority === priority)
+              .map((task) => ({
+                ...task,
+                user: data.users.find((user) => user.id === task.userId),
+              }))
+          ),
       }));
-    }else{
+    } else {
       return [];
     }
   };
+
+
 
   const displayData = getTasksByDisplayType();
 
   const handleDisplayChange = (type) => {
     setDisplayType(type);
   }
+  const handleSortChange = (sortType) => {
+    setSortType(sortType);
+  }
+  
 
  return (
     <div className="app">
@@ -90,6 +119,15 @@ const App = () => {
               <option value="user">user</option>
               <option value="status">status</option>
               <option value="priority">priority</option>
+            </select>
+          </label>
+        </div>
+        <div className='dropdown-container'>
+          <label className='dropdown-label'>
+            Sort by:
+            <select className='dropdown-select'  value={sortType} onChange={(e) => handleSortChange(e.target.value)}>
+              <option value="priority">priority</option>
+              <option value="title">title</option>
             </select>
           </label>
         </div>
