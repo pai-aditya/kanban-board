@@ -36,7 +36,6 @@ const PriorityBoard = ({data}) => {
             <div className="board_header">
                 
                 <p className="board_header_title">
-                {/* <CircleEllipsis className='task-icon'/> */}
                 {priorityIconShow(data.priority)}
                 {priorityString(data?.priority)}
                     <span>{data?.tasks?.length || 0}</span>
@@ -49,7 +48,7 @@ const PriorityBoard = ({data}) => {
                 </div>
             </div>
             
-            <div className="board_cards custom-scroll">
+            <div className="board_cards">
             {data?.tasks?.map((item) => (
                 <PriorityCard
                     card={item}

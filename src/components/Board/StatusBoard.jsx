@@ -31,19 +31,9 @@ const StatusBoard = ({data}) => {
                 </p>
                 <div
                     className="board_header_title_more"
-                    //   onClick={() => setShowDropdown(true)} 
                 >
                     <Plus className='plus'/>
                     <MoreHorizontal className='more-horizontal'/>
-
-                    {/* {showDropdown && (
-                        <Dropdown
-                        class="board_dropdown"
-                        onClose={() => setShowDropdown(false)}
-                        >
-                        <p onClick={() => props.removeBoard()}>Delete Board</p>
-                        </Dropdown>
-                    )} */}
                 </div>
             </div>
             
@@ -53,13 +43,6 @@ const StatusBoard = ({data}) => {
                     card={item}
                 />
                 ))}
-                {/* <Editable
-                text="+ Add Card"
-                placeholder="Enter Card Title"
-                displayClass="board_add-card"
-                editClass="board_add-card_edit"
-                onSubmit={(value) => props.addCard(props.board?.id, value)}
-                /> */}
             </div>
         </div>
       );

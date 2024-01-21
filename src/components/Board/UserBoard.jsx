@@ -8,7 +8,6 @@ const UserBoard = ({data}) => {
             <div className="board_header">
                 
                 <p className="board_header_title">
-                {/* <CircleEllipsis className='task-icon'/> */}
                 <img className='task-icon' src={`https://ui-avatars.com/api/?name=${data.user.name}&background=random`} alt='' width={25}/>
                 {data?.user.name}
                     <span>{data?.tasks?.length || 0}</span>

@@ -112,19 +112,21 @@ const App = () => {
  return (
     <div className="app">
       <div className="app_nav">
+
+      
         <div className='dropdown-container'>
           <label className='dropdown-label'>
-            Display by:
+            Grouping
             <select className='dropdown-select'  value={displayType} onChange={(e) => handleDisplayChange(e.target.value)}>
-              <option value="user">user</option>
-              <option value="status">status</option>
-              <option value="priority">priority</option>
+              <option className='dropdown-option' value="user">user</option>
+              <option className='dropdown-option' value="status">status</option>
+              <option className='dropdown-option' value="priority">priority</option>
             </select>
           </label>
         </div>
         <div className='dropdown-container'>
           <label className='dropdown-label'>
-            Sort by:
+            Ordering
             <select className='dropdown-select'  value={sortType} onChange={(e) => handleSortChange(e.target.value)}>
               <option value="priority">priority</option>
               <option value="title">title</option>
